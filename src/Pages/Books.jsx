@@ -1,6 +1,7 @@
 
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useEffect, useState } from 'react'
+import { Navigate } from 'react-router';
 import MultiActionAreaCard from '../Components/Book';
 
 function Books() {
@@ -10,11 +11,22 @@ function Books() {
     const [cost, setCost] = useState("");
 
 
+    const user = localStorage.getItem("user") || null;
 
-   useEffect(() => {
-     fetch('http://localhost:3001/books').then(res=>res.json()).then(res=>setData(res))
-    
-    }, [])
+
+
+
+    useEffect(() => {
+        fetch('http://localhost:3001/books').then(res=>res.json()).then(res=>setData(res))
+       
+       }, [])
+
+
+
+
+    if(!user){
+        return <Navigate to={"/usersignup"}/>
+    }
 
   return (
     <>

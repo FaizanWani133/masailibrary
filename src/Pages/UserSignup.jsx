@@ -6,31 +6,43 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Navigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
-export default function FormDialog() {
+export default function UserSignup() {
     const [open, setOpen] = React.useState(true);
     const [email , setEmail] = React.useState("");
+    const [name , setName] = React.useState("");
     const [password , setPassword] = React.useState("");
-    const admin = localStorage.getItem("admin")
-    function handleLogin(){
-        if(email==='admin@gmail.com' && password === 'masai'){
-            localStorage.setItem('admin',true);
-            
-           return  
-        }else{
-            alert("error")
-        }
-    }
-    if(admin){
-        return <Navigate to={'/admin'}/>
+    const navigate = useNavigate();
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    
+    function handleSignup(){
+        let body = {
+            name,
+            email,
+            password
+        };
+        users = [...users,body];
+        localStorage.setItem('users', JSON.stringify(users))
+        return  navigate("/userlogin")
     }
   return (
     <div>
       <Dialog open={open} >
-        <DialogTitle>Login</DialogTitle>
+        <DialogTitle>Signup</DialogTitle>
         <DialogContent>
-          
+        <TextField
+            autoFocus
+            margin="dense"
+            id="username"
+            label="Username"
+            type="name"
+            fullWidth
+            variant="standard"
+            value={name} 
+            onChange={(e)=>setName(e.target.value)}
+          />
           <TextField
             autoFocus
             margin="dense"
@@ -53,9 +65,10 @@ export default function FormDialog() {
             value={password} 
             onChange={(e)=>setPassword(e.target.value)}
           />
+          
         </DialogContent>
         <DialogActions>
-            <Button onClick={handleLogin}>Login</Button>
+            <Button onClick={handleSignup}>Signup</Button>
         </DialogActions>
        
       </Dialog>

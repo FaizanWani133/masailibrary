@@ -6,31 +6,30 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Navigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 
-export default function FormDialog() {
+export default function UserLogin() {
     const [open, setOpen] = React.useState(true);
     const [email , setEmail] = React.useState("");
     const [password , setPassword] = React.useState("");
-    const admin = localStorage.getItem("admin")
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    const navigate = useNavigate();
+    
     function handleLogin(){
-        if(email==='admin@gmail.com' && password === 'masai'){
-            localStorage.setItem('admin',true);
-            
-           return  
+        const flag = users.find(el=>el.email === email && el.password === password)
+        if(flag){
+            localStorage.setItem('user',true);
+            return navigate("/book")
         }else{
-            alert("error")
+            alert("wrong password")
         }
-    }
-    if(admin){
-        return <Navigate to={'/admin'}/>
     }
   return (
     <div>
       <Dialog open={open} >
         <DialogTitle>Login</DialogTitle>
         <DialogContent>
-          
+        
           <TextField
             autoFocus
             margin="dense"
@@ -53,6 +52,7 @@ export default function FormDialog() {
             value={password} 
             onChange={(e)=>setPassword(e.target.value)}
           />
+          
         </DialogContent>
         <DialogActions>
             <Button onClick={handleLogin}>Login</Button>

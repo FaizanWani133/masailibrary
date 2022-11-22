@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router";
 import BasicTable from "../Components/BooksTable";
 import FormDialog from "./AdminForm";
 
@@ -45,7 +46,7 @@ function Admin() {
   useEffect(() => {}, [admin]);
 
   if (!admin) {
-    return <FormDialog />;
+    return <Navigate to="/adminlogin"/>
   }
 
   return (
