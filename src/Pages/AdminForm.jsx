@@ -6,20 +6,21 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Navigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 
 export default function FormDialog() {
     const [open, setOpen] = React.useState(true);
     const [email , setEmail] = React.useState("");
     const [password , setPassword] = React.useState("");
     const admin = localStorage.getItem("admin")
+    const navigate = useNavigate();
     function handleLogin(){
         if(email==='admin@gmail.com' && password === 'masai'){
             localStorage.setItem('admin',true);
             
-           return  
+           return navigate("/admin") 
         }else{
-            alert("error")
+            alert("Wrong Credentials")
         }
     }
     if(admin){
@@ -55,7 +56,7 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-            <Button onClick={handleLogin}>Login</Button>
+            <Button variant="contained" onClick={handleLogin}>Login</Button>
         </DialogActions>
        
       </Dialog>

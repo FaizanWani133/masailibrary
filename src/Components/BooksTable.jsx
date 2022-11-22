@@ -18,8 +18,22 @@ export default function BasicTable() {
 
 
 
+
+
+
+    function handleDelete(id){
+        fetch(`https://librarybackendmasai.herokuapp.com/books/${id}`,{
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'},
+
+        }).then(res=>res.json()).then(re=>console.log(re))
+
+    }
+
+
+
     React.useEffect(() => {
-     fetch('http://localhost:3001/books').then(res=>res.json()).then(res=>setData(res))
+     fetch('https://librarybackendmasai.herokuapp.com/books').then(res=>res.json()).then(res=>setData(res))
     
     }, [])
     
@@ -55,7 +69,7 @@ export default function BasicTable() {
               <TableCell align="right">{row.publisher}</TableCell>
               <TableCell align="right">{row.cost}</TableCell>
               <TableCell align="right"><Button>EDIT</Button></TableCell>
-              <TableCell align="right"><Button>Delete</Button></TableCell>
+              <TableCell align="right"><Button onClick={()=>handleDelete(row.id)}>Delete</Button></TableCell>
             </TableRow>
           ))}
         </TableBody>

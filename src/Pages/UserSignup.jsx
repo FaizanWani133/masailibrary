@@ -28,8 +28,8 @@ export default function UserSignup() {
         return  navigate("/userlogin")
     }
   return (
-    <div>
-      <Dialog open={open} >
+    
+      <Dialog sx={{bgcolor:"teal"}} open={open} >
         <DialogTitle>Signup</DialogTitle>
         <DialogContent>
         <TextField
@@ -37,7 +37,7 @@ export default function UserSignup() {
             margin="dense"
             id="username"
             label="Username"
-            type="name"
+            
             fullWidth
             variant="standard"
             value={name} 
@@ -68,10 +68,13 @@ export default function UserSignup() {
           
         </DialogContent>
         <DialogActions>
-            <Button onClick={handleSignup}>Signup</Button>
+            <Button variant='contained' onClick={handleSignup}>Signup</Button>
+            <Button variant='outlined' onClick={()=>{
+                return navigate("/userlogin")
+            }}>Have an Account</Button>
         </DialogActions>
        
       </Dialog>
-    </div>
+    
   );
 }

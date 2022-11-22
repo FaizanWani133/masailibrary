@@ -16,17 +16,21 @@ export default function UserLogin() {
     const navigate = useNavigate();
     
     function handleLogin(){
-        const flag = users.find(el=>el.email === email && el.password === password)
+        users = JSON.parse(localStorage.getItem('users')) || [];
+        const flag = users.some(el=>el.email===email && el.password === password )
         if(flag){
             localStorage.setItem('user',true);
             return navigate("/book")
         }else{
             alert("wrong password")
         }
+        // console.log(email,password);
+        // console.log(flag);
+        // console.log(users);
     }
   return (
-    <div>
-      <Dialog open={open} >
+    
+      <Dialog sx={{bgcolor:"teal"}} open={open} >
         <DialogTitle>Login</DialogTitle>
         <DialogContent>
         
@@ -55,10 +59,13 @@ export default function UserLogin() {
           
         </DialogContent>
         <DialogActions>
-            <Button onClick={handleLogin}>Login</Button>
+            <Button variant='contained' onClick={handleLogin}>Login</Button>
+            <Button variant='outlined' onClick={()=>{
+                return navigate("/usersignup")
+            }}>Need an Account</Button>
         </DialogActions>
        
       </Dialog>
-    </div>
+   
   );
 }

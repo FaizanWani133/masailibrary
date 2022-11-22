@@ -6,6 +6,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  TextField,
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
@@ -24,7 +25,7 @@ function Admin() {
   const admin = localStorage.getItem("admin");
 
   function handleFormSubmit() {
-    fetch("http://localhost:3001/books", {
+    fetch("https://librarybackendmasai.herokuapp.com/books", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -50,27 +51,37 @@ function Admin() {
   }
 
   return (
-    <Box>
-    <Stack width={"30%"} margin="0 auto">
+    <Box mt={6}>
+    <Stack border={"1px solid black"} borderRadius="10px" width={"30%"} margin="0 auto" spacing={"20px"} padding="20px">
+        
       <Input
+        required="true"
+        id="outlined-basic"
+        variant="outlined"
         value={image}
         onChange={(e) => setImage(e.target.value)}
         placeholder="Image URL"
         type="text"
       ></Input>
+      
+      
       <Input
+      mt={6}
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Name of the Book"
         type="text"
       ></Input>
+     
       <Input
+      mt={6}
         value={author}
         onChange={(e) => setAuthor(e.target.value)}
         placeholder="Author of the Book"
         type="text"
       ></Input>
-      <FormControl fullWidth>
+      
+      <FormControl mt={6} fullWidth>
         <InputLabel id="demo-simple-select-label">Genre</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -86,7 +97,7 @@ function Admin() {
           <MenuItem value={"Business"}>Business</MenuItem>
         </Select>
       </FormControl>
-      <FormControl fullWidth>
+      <FormControl mt={6} fullWidth>
         <InputLabel id="demo-simple-select-label">Edition</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -101,20 +112,22 @@ function Admin() {
         </Select>
       </FormControl>
       <Input
+      mt={6}
         value={publisher}
         onChange={(e) => setPublisher(e.target.value)}
         placeholder="Publisher"
         type="text"
       ></Input>
       <Input
+      mt={6}
         value={cost}
         onChange={(e) => setCost(e.target.value)}
         type="number"
         placeholder="Cost"
       ></Input>
-      <Button onClick={handleFormSubmit}>Submit</Button>
+      <Button variant="contained" mt={6} onClick={handleFormSubmit}>Submit</Button>
     </Stack>
-    <Box>
+    <Box  width={"90%"} margin="20px auto"  border="1px solid black">
         <BasicTable/>
 
     </Box>

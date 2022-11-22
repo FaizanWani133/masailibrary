@@ -7,7 +7,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 
 export default function MultiActionAreaCard({data}) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card  sx={{ maxWidth: 345,border:"1px solid grey" }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -15,7 +15,7 @@ export default function MultiActionAreaCard({data}) {
           image={data.image}
           alt="green iguana"
         />
-        <CardContent>
+        <CardContent sx={{spacing:"20px"}}>
           <Typography gutterBottom variant="h5" component="div">
             {data.name}
           </Typography>
@@ -37,7 +37,7 @@ export default function MultiActionAreaCard({data}) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button variant='contained' size="small" color="primary">
           Borrow
         </Button>
       </CardActions>
